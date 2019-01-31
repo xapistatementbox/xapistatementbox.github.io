@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>xlearnlab</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <!-- Bootstrap core CSS -->
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/site.css" rel="stylesheet">
+
+    <script type="text/javascript" src="../js/cryptojs_v3.1.2.js"></script>
+    <script type="text/javascript" src="../js/xapiwrapper.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-light bg-light " style="background-color: #004676;">
+    <a class="navbar-brand" href="../index.html">xapistatementbox</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+
+            <li class="nav-item active">
+                <a class="nav-link" href="../index.html">Home <span class="sr-only">(current)</span></a>                
+            </li>                             
+
+        </ul>
+    </div>
+</nav>
+    
+
+
+	<div class="container">
+
+	
+        <div class="row">
+            <div class="col-12">
+        
+        <nav Class="breadcrumb">
+            <a Class="breadcrumb-item" href='../index.html'>Home</a>
+            <a Class="breadcrumb-item" href='index.html'>Statements</a>
+            <span Class="breadcrumb-item active">Activity Launched</span>
+            </nav>
+        
+        </div>
+        </div>
+  
+
+		<div class="row">
+    		<div class="col-12">
+                
+                <p><h1>Activity Launched</h1> </p>
+                
+                <p>This example creates a simple launched statement for an activity.</p>
+
+                <form id="frm" action="#" method="post">
+                                     
+                    <div class="form-group">
+                        <label for="activityurl">Activity URL</label>
+                        <input class="form-control" type="text" name="name" id="activityurl" value="https://xapistatementbox.github.io/sandbox/launched.html"  />
+                    </div>                                     
+                    
+                    <div class="form-group">
+                        <label for="activitydescription">Activity Description</label>
+                        <input class="form-control" type="text" name="name" id="activitydescription" value="Launched Demo Page"  />
+                    </div>     
+
+                </form>	
+
+                <p>
+
+                        <button type="button" class="btn btn-secondary" onclick="send_statement()">Create Statement</button>                      
+                        
+                        <script>
+
+                          function send_statement() {
+                      
+                              //get LearnerID   
+                      
+                              //define the xapi statement being sent from scratch
+                              var statement = new ADL.XAPIStatement(
+                              new ADL.XAPIStatement.Agent(ADL.XAPIWrapper.hash('mailto:guest@xlearnlab.com'), 'Guest'),
+                              new ADL.XAPIStatement.Verb('http://adlnet.gov/expapi/verbs/launched', 'launched'),
+                              new ADL.XAPIStatement.Activity(document.getElementById("activityurl").value, document.getElementById("activitydescription").value)
+                              );
+                      
+                              var div = document.getElementById("myStatement");
+                              document.getElementById("myStatement").innerHTML = "<p>Statement:</p><pre>" + JSON.stringify(statement, null, 4) + "</pre>";
+                                                    
+                          }
+                      
+                          </script>
+                </p>
+                
+                <div id="myStatement"></div>
+                <p><div id="myStatus"></div></p>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-12">
+			</div>
+		</div>
+
+
+	</div>
+
+
+	<footer class="container">
+		<hr />
+        <p>xAPI Cohort Spring 2019 - Team Statementbox: <a href="https://oliverpincus.com">Oliver Pincus</a> - Shared under the <a href="https://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache 2.0 license</a></p>
+	</footer>
+
+
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')</script>
+	<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>
