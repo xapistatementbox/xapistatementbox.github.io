@@ -17,6 +17,8 @@
     <script type="text/javascript" src="../js/xapiwrapper.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     
+    <script src="../scripts/xapifunction.js"></script>
+
 </head>
 <body>
 
@@ -98,7 +100,25 @@
                           }
                       
                           </script>
+
                 </p>
+
+
+                <p>
+
+                    <button type="button" class="btn btn-secondary" onclick="send_statementfromfunction()">Create Statement from JavaScript function</button>                      
+                    
+                    <script>
+
+                      function send_statementfromfunction() {
+                        var statement = CreateXAPIStatement(actor="A",url="URL",score="100");                                              
+                        document.getElementById("myStatement").innerHTML = "<p>Statement from JavaScript Function:</p><pre>" + JSON.stringify(statement, null, 4) + "</pre>";
+                                                
+                      }
+                  
+                      </script>
+
+            </p>
                 
                 <div id="myStatement"></div>
                 <p><div id="myStatus"></div></p>
