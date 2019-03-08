@@ -3,7 +3,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>xlearnlab</title>
+    <title>xapistatementbox</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
@@ -76,33 +76,15 @@
                     </div>     
 
                 </form>	
-
-                <p>
-
-                        <button type="button" class="btn btn-secondary" onclick="send_statement()">Create Statement</button>                      
-                        
-                        <script>
-
-                          function send_statement() {
-                      
-                              //get LearnerID   
-                      
-                              //define the xapi statement being sent from scratch
-                              var statement = new ADL.XAPIStatement(
-                              new ADL.XAPIStatement.Agent(ADL.XAPIWrapper.hash('mailto:guest@xlearnlab.com'), 'Guest'),
-                              new ADL.XAPIStatement.Verb('http://adlnet.gov/expapi/verbs/launched', 'launched'),
-                              new ADL.XAPIStatement.Activity(document.getElementById("activityurl").value, document.getElementById("activitydescription").value)
-                              );
-                      
-                              var div = document.getElementById("myStatement");
-                              document.getElementById("myStatement").innerHTML = "<p>Statement:</p><pre>" + JSON.stringify(statement, null, 4) + "</pre>";
-                                                    
-                          }
-                      
-                          </script>
-
-                </p>
-
+              
+                <form id="frmparameters" action="#" method="post">
+                                     
+                    <div class="form-group">
+                        <label for="xapifunctionparameters">Parameters</label>
+                        <input class="form-control" type="text" name="name" id="xapifunctionparameters" value="actor='A',objecturi='https://xapistatementbox.github.io/sandbox/launched.html',objectdescription='Launched Demo Page',verburi='http://adlnet.gov/expapi/verbs/launched',verb='launched',score='100'"  />
+                    </div>                                     
+                                        
+                </form>	
 
                 <p>
 
@@ -111,7 +93,20 @@
                     <script>
 
                       function send_statementfromfunction() {
-                        var statement = CreateXAPIStatement(actor="A",url="URL",score="100");                                              
+                        
+                        var string = document.getElementById("xapifunctionparameters").value;
+                        var array = string.split(",");
+
+                        var opt = {};
+
+                        for (let i=0;i < array.length; i++)
+                        {                        
+                            var res = array[i].split("=");                         
+                            opt[res[0]] = res[1].replace(/^'(.*)'$/, '$1');
+                        }
+                                                
+                        options = opt
+                        var statement = CreateXAPIStatement();                                                                      
                         document.getElementById("myStatement").innerHTML = "<p>Statement from JavaScript Function:</p><pre>" + JSON.stringify(statement, null, 4) + "</pre>";
                                                 
                       }
